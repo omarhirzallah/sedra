@@ -168,7 +168,7 @@ const AdminItemLine = ({ item, lang, currency, onEdit, onDelete, onToggle, onMov
       </div>
       <div style={{ fontSize: 12.5, color: "var(--gold)", marginTop: 3, fontVariantNumeric: "tabular-nums" }}>{fmtPrice(item.price)} {currency.en}</div>
     </div>
-    <div style={{ display: "flex", alignItems: "center", gap: 2, flex: "0 0 auto" }}>
+    <div className="item-actions" style={{ display: "flex", alignItems: "center", gap: 2, flex: "0 0 auto" }}>
       <button className="icon-btn" disabled={isFirst} style={{ opacity: isFirst ? .3 : 1 }} onClick={() => onMove(-1)} title={t(AS.moveUp, lang)}><Icon name="up" size={16} /></button>
       <button className="icon-btn" disabled={isLast} style={{ opacity: isLast ? .3 : 1 }} onClick={() => onMove(1)} title={t(AS.moveDown, lang)}><Icon name="down" size={16} /></button>
       <button onClick={onToggle} title={t(AS.available, lang)} style={{ padding: "0 4px" }}><span className={"switch" + (item.available ? " on" : "")} /></button>
@@ -215,11 +215,11 @@ export const AdminDashboard = ({ menu, setMenu, settings, setSettings, lang, set
   return (
     <div>
       <header style={{ position: "sticky", top: 0, zIndex: 40, background: "rgba(10,11,9,.9)", backdropFilter: "blur(14px)", borderBottom: "1px solid var(--line)" }}>
-        <div className="wrap" style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 18px" }}>
+        <div className="wrap admin-header-inner">
           <LogoMark size={38} logo={settings.logo} />
-          <div style={{ flex: "1 1 auto", minWidth: 0 }}>
-            <div className="display" style={{ fontSize: 21, fontWeight: 600, lineHeight: 1 }}>{t(AS.adminTitle, lang)}</div>
-            <div style={{ fontSize: 11, color: "var(--leaf)", marginTop: 2 }}>{t(AS.liveNote, lang)}</div>
+          <div style={{ flex: "1 1 auto", minWidth: 0, overflow: "hidden" }}>
+            <div className="display" style={{ fontSize: 21, fontWeight: 600, lineHeight: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t(AS.adminTitle, lang)}</div>
+            <div style={{ fontSize: 11, color: "var(--leaf)", marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t(AS.liveNote, lang)}</div>
           </div>
           <LangToggle lang={lang} setLang={setLang} />
           <button className="icon-btn" onClick={() => setShowSettings(true)} title={t(AS.settings, lang)}><Icon name="gear" size={18} /></button>
@@ -227,7 +227,7 @@ export const AdminDashboard = ({ menu, setMenu, settings, setSettings, lang, set
         </div>
       </header>
 
-      <main className="wrap" style={{ paddingTop: 22, paddingBottom: 90, maxWidth: 760 }}>
+      <main className="wrap" style={{ paddingTop: 22, paddingBottom: 90 }}>
         <div className="admin-grid">
           {menu.map((cat, ci) => (
             <section key={cat.id} className="card" style={{ padding: "16px 18px" }}>
