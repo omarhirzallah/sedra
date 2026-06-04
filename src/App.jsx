@@ -22,7 +22,11 @@ function loadState() {
 export default function App() {
   const saved = loadState()
   const [menu, setMenu] = useState(saved?.menu || DEFAULT_MENU)
-  const [settings, setSettings] = useState(saved?.settings || DEFAULT_SETTINGS)
+  const [settings, setSettings] = useState(
+    saved?.settings
+      ? { ...DEFAULT_SETTINGS, ...saved.settings, logo: saved.settings.logo ?? DEFAULT_SETTINGS.logo }
+      : DEFAULT_SETTINGS
+  )
   const [lang, setLang] = useState(() => {
     const u = new URLSearchParams(location.search).get("lang")
     return u === "ar" ? "ar" : (saved?.lang || "en")
