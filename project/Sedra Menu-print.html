@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sedra · سدرة — Menu (Print)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0D0D0D;
+    --green:#1B4332;
+    --leaf:#40916C;
+    --leaf-soft:rgba(64,145,108,.16);
+    --gold:#C5A253;
+    --gold-bright:#E2C485;
+    --cream:#F8F9F4;
+    --muted:rgba(248,249,244,.55);
+    --faint:rgba(248,249,244,.36);
+    --line:rgba(248,249,244,.10);
+    --line-soft:rgba(248,249,244,.06);
+    --warn:#C9603F;
+    --font-display:"Cormorant Garamond", Georgia, serif;
+    --font-body:"Jost", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .display{font-family:var(--font-display);}
+  .gold{color:var(--gold);}
+
+  .page{max-width:760px;margin:0 auto;padding:46px 48px 60px;}
+
+  /* masthead */
+  .masthead{display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding-bottom:26px;margin-bottom:30px;border-bottom:1px solid rgba(197,162,83,.32);}
+  .mark{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px;
+    background:radial-gradient(circle at 50% 38%, rgba(64,145,108,.22), rgba(13,13,13,.2));
+    border:1px solid rgba(197,162,83,.42);}
+  .brand{font-size:48px;font-weight:600;letter-spacing:.01em;line-height:1;}
+  .brand .ar{font-family:"Amiri",serif;margin-inline-start:14px;color:var(--gold);}
+  .tagline{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-top:12px;font-weight:500;}
+
+  /* category */
+  .cat{break-inside:avoid;margin-bottom:30px;}
+  .cat.big{break-inside:auto;}
+  .cat-head{display:flex;align-items:baseline;gap:12px;break-after:avoid;}
+  .cat-head h2{margin:0;font-size:30px;font-weight:600;letter-spacing:.01em;white-space:nowrap;}
+  .cat-head .ar{font-family:"Amiri",serif;font-size:23px;color:var(--muted);}
+  .cat-rule{height:1px;background:linear-gradient(90deg, rgba(197,162,83,.45), transparent);margin:6px 0 10px;break-after:avoid;}
+
+  .item{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line-soft);break-inside:avoid;}
+  .item:last-child{border-bottom:none;}
+  .names{flex:0 1 auto;min-width:0;}
+  .nm-en{font-size:16px;font-weight:500;}
+  .nm-ar{font-family:"Amiri",serif;font-size:16px;color:var(--muted);margin-inline-start:9px;}
+  .desc{font-size:12px;color:var(--muted);line-height:1.4;font-weight:300;margin-top:2px;max-width:48ch;}
+  .leader{flex:1 1 auto;border-bottom:1px dotted rgba(248,249,244,.26);transform:translateY(-4px);min-width:18px;}
+  .price{flex:0 0 auto;font-variant-numeric:tabular-nums;font-weight:500;color:var(--gold-bright);font-size:15.5px;white-space:nowrap;}
+  .price .cur{font-size:10.5px;color:var(--muted);margin-inline-start:4px;letter-spacing:.04em;font-weight:400;}
+  .tag{display:inline-flex;align-items:center;font-size:9.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 7px;border-radius:999px;line-height:1;margin-inline-start:8px;vertical-align:middle;white-space:nowrap;}
+  .tag.gold{color:var(--gold-bright);background:rgba(197,162,83,.13);border:1px solid rgba(197,162,83,.34);}
+  .tag.leaf{color:#8fd3b2;background:var(--leaf-soft);border:1px solid rgba(64,145,108,.34);}
+  .tag.warn{color:#e79a7f;background:rgba(201,96,63,.14);border:1px solid rgba(201,96,63,.34);}
+  .item.out .price{color:var(--muted);text-decoration:line-through;}
+
+  .foot{text-align:center;color:var(--faint);font-size:11.5px;margin-top:38px;padding-top:22px;border-top:1px solid var(--line);}
+  .foot .display{font-size:18px;color:var(--gold);margin-bottom:5px;}
+
+  @media print{
+    @page{ size:A4 portrait; margin:14mm 12mm; }
+    html,body{background:var(--bg) !important;}
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    .page{max-width:none;margin:0;padding:0;}
+    .item, .cat:not(.big){break-inside:avoid;}
+    .cat-head, .cat-rule{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="js/data.jsx"></script>
+<script type="text/babel">
+const { DEFAULT_MENU, DEFAULT_SETTINGS, TAGS } = window.SEDRA;
+const LS_KEY = "sedra_menu_v1";
+
+// Use the owner's live menu if saved, else the default
+function loadMenu(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){ const p = JSON.parse(raw); if(p.menu && p.settings) return { menu:p.menu, settings:p.settings }; }
+  }catch(_){}
+  return { menu: DEFAULT_MENU, settings: DEFAULT_SETTINGS };
+}
+
+const fmt = (n)=>Number(n||0).toFixed(2);
+
+function LogoMark({logo}){
+  if(logo) return <div className="mark"><img src={logo} alt="" style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:"50%"}}/></div>;
+  return (
+    <div className="mark">
+      <svg width="46" height="46" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <circle cx="22" cy="24" r="11" fill="#2d6a4f" opacity=".95" />
+        <circle cx="38" cy="22" r="12.5" fill="#40916C" opacity=".92" />
+        <circle cx="33" cy="32" r="11" fill="#1B4332" opacity=".95" />
+        <circle cx="44" cy="33" r="8" fill="#40916C" opacity=".85" />
+        <circle cx="20" cy="33" r="7.5" fill="#2d6a4f" opacity=".9" />
+        <line x1="32" y1="34" x2="32" y2="52" stroke="#C5A253" strokeWidth="2.4" strokeLinecap="round" />
+        <line x1="32" y1="44" x2="26" y2="39" stroke="#C5A253" strokeWidth="1.8" strokeLinecap="round" />
+        <line x1="32" y1="46" x2="39" y2="41" stroke="#C5A253" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}
+
+function Tag({id}){
+  const m = TAGS[id]; if(!m) return null;
+  return <span className={"tag "+m.kind}>{m.label.en}</span>;
+}
+
+function Item({it, cur}){
+  const out = !it.available;
+  return (
+    <div className={"item"+(out?" out":"")}>
+      <div className="names">
+        <span className="nm-en">{it.name.en}</span>
+        {it.name.ar && <span className="nm-ar">{it.name.ar}</span>}
+        {it.tags.map(tg=><Tag key={tg} id={tg}/>)}
+        {it.desc.en && <div className="desc">{it.desc.en}</div>}
+      </div>
+      <span className="leader" />
+      <span className="price">
+        {out ? <span className="tag warn" style={{marginInlineStart:0}}>Sold out</span>
+             : <>{fmt(it.price)}<span className="cur">{cur.en}</span></>}
+      </span>
+    </div>
+  );
+}
+
+function PrintMenu(){
+  const { menu, settings } = loadMenu();
+  return (
+    <div className="page">
+      <div className="masthead">
+        <LogoMark logo={settings.logo} />
+        <div className="brand display">{settings.brand.en}<span className="ar">{settings.brand.ar}</span></div>
+        <div className="tagline">{settings.tagline.en}</div>
+      </div>
+      {menu.map(cat=>(
+        <section key={cat.id} className={"cat"+(cat.items.length>10?" big":"")}>
+          <div className="cat-head">
+            <h2 className="display gold">{cat.name.en}</h2>
+            <span className="ar">{cat.name.ar}</span>
+          </div>
+          <div className="cat-rule" />
+          {cat.items.map(it=><Item key={it.id} it={it} cur={settings.currency} />)}
+        </section>
+      ))}
+      <div className="foot">
+        <div className="display">{settings.brand.en} · {settings.brand.ar}</div>
+        {settings.tagline.en} — all prices in {settings.currency.en}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<PrintMenu />);
+
+// auto-print once fonts + render settle
+(async function(){
+  try{ await (document.fonts && document.fonts.ready); }catch(_){}
+  setTimeout(()=>window.print(), 600);
+})();
+</script>
+</body>
+</html>
