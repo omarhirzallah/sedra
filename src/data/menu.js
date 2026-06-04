@@ -1,4 +1,5 @@
 /* Sedra — menu data + UI strings. All content bilingual (EN / AR). */
+import logoUrl from '../assets/logo.png'
 
 export const mk = (en, ar, price, opts = {}) => ({
   id: opts.id || (en.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")),
@@ -134,7 +135,7 @@ export const DEFAULT_SETTINGS = {
   currency: { en: "JOD", ar: "د.أ" },
   brand: { en: "Sedra", ar: "سدرة" },
   tagline: { en: "coffee & more", ar: "قهوة وأكثر" },
-  logo: null,
+  logo: logoUrl,
   adminPassword: "sedra",
 };
 
