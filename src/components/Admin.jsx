@@ -171,7 +171,7 @@ const AdminItemLine = ({ item, lang, currency, onEdit, onDelete, onToggle, onMov
     <div className="item-actions" style={{ display: "flex", alignItems: "center", gap: 2, flex: "0 0 auto" }}>
       <button className="icon-btn" disabled={isFirst} style={{ opacity: isFirst ? .3 : 1 }} onClick={() => onMove(-1)} title={t(AS.moveUp, lang)}><Icon name="up" size={16} /></button>
       <button className="icon-btn" disabled={isLast} style={{ opacity: isLast ? .3 : 1 }} onClick={() => onMove(1)} title={t(AS.moveDown, lang)}><Icon name="down" size={16} /></button>
-      <button onClick={onToggle} title={t(AS.available, lang)} style={{ padding: "0 4px" }}><span className={"switch" + (item.available ? " on" : "")} /></button>
+      <button onClick={onToggle} title={t(AS.available, lang)} className="icon-btn" style={{ width: 48 }}><span className={"switch" + (item.available ? " on" : "")} /></button>
       <button className="icon-btn" onClick={onEdit}><Icon name="edit" size={16} /></button>
       <button className="icon-btn" style={{ color: "#e79a7f" }} onClick={onDelete}><Icon name="trash" size={16} /></button>
     </div>
